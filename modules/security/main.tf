@@ -50,6 +50,15 @@ resource "aws_security_group" "app" {
     security_groups = [aws_security_group.web.id]
   }
 
+   # Allow traffic from ALB on app port 3000
+  ingress {
+    description     = "App port 3000 from ALB"
+    from_port       = 3000
+    to_port         = 3000
+    protocol        = "tcp"
+    security_groups = [aws_security_group.web.id]
+  }
+
 
   ingress {
     description     = "ICMP from web tier"

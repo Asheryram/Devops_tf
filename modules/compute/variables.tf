@@ -1,49 +1,49 @@
 variable "private_subnets" {
-type = list(string)
+  type = list(string)
 }
 
 
 variable "app_sg_id" {
-type = string
+  type = string
 }
 
 
 variable "target_group_arn" {
-type = string
+  type = string
 }
 
 
 variable "instance_type" {
-type = string
-default = "t3.micro"
+  type    = string
+  default = "t3.micro"
 }
 
 
 variable "min_size" {
-type = number
-default = 1
+  type    = number
+  default = 1
 }
 
 
 variable "max_size" {
-type = number
-default = 2
+  type    = number
+  default = 2
 }
 
 
 variable "desired_capacity" {
-type = number
-default = 1
+  type    = number
+  default = 1
 }
 
 
 variable "project" {
-type = string
+  type = string
 }
 
 
 variable "tags" {
-type = map(string)
+  type = map(string)
 }
 
 

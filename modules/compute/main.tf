@@ -9,49 +9,48 @@ resource "aws_launch_template" "this" {
 #!/bin/bash
 set -e
 
-# Update system
-apt update -y
-apt install -y apache2 curl
+############################
+# SYSTEM SETUP
+############################
+apt-get update -y
+apt-get install -y curl git
 
-# Enable Apache
-systemctl start apache2
-systemctl enable apache2
+############################
+# INSTALL NODE.JS 18
+############################
+curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+apt-get install -y nodejs
 
-# Get instance metadata (IMDSv2)
-TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" \
-  -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+############################
+# APP DIRECTORY
+############################
+mkdir -p /opt/todo-app
+cd /opt/todo-app
 
-INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" \
-  http://169.254.169.254/latest/meta-data/instance-id)
+############################
+# CLONE APP FROM GITHUB
+############################
+git clone https://github.com/Asheryram/todo-app.git .
+npm install
 
-PRIVATE_IP=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" \
-  http://169.254.169.254/latest/meta-data/local-ipv4)
+############################
+# ENVIRONMENT VARIABLES
+############################
+cat <<ENV > /etc/profile.d/todo-env.sh
+export PORT=3000
+export DB_HOST="${var.db_host}"
+export DB_USER="${var.db_user}"
+export DB_PASSWORD="${var.db_password}"
+export DB_NAME="${var.db_name}"
+export DB_PORT="${var.db_port}"
+ENV
 
-AZ=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" \
-  http://169.254.169.254/latest/meta-data/placement/availability-zone)
+source /etc/profile.d/todo-env.sh
 
-# Create web page
-cat <<HTML > /var/www/html/index.html
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Application Server</title>
-  <style>
-    body { font-family: Arial; background: #f4f4f4; }
-    .box { background: white; padding: 20px; margin: 50px auto; width: 400px; }
-  </style>
-</head>
-<body>
-  <div class="box">
-    <h2>Application Server</h2>
-    <p><strong>Instance ID:</strong> $INSTANCE_ID</p>
-    <p><strong>Private IP:</strong> $PRIVATE_IP</p>
-    <p><strong>Availability Zone:</strong> $AZ</p>
-    <p><strong>Security Group:</strong> ${var.app_sg_id}</p>
-  </div>
-</body>
-</html>
-HTML
+############################
+# START APPLICATION
+############################
+nohup node server.js > app.log 2>&1 &
 
 EOF
   )
