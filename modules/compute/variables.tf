@@ -52,17 +52,6 @@ variable "db_host" {
   type        = string
 }
 
-variable "db_user" {
-  description = "Database username"
-  type        = string
-}
-
-variable "db_password" {
-  description = "Database password"
-  type        = string
-  sensitive   = true
-}
-
 variable "db_name" {
   description = "Database name"
   type        = string
@@ -72,4 +61,14 @@ variable "db_port" {
   description = "Database port"
   type        = number
   default     = 3306
+}
+
+variable "db_credentials_secret_arn" {
+  description = "ARN of the Secrets Manager secret containing database credentials"
+  type        = string
+}
+
+variable "db_credentials_secret_id" {
+  description = "ID of the Secrets Manager secret containing database credentials"
+  type        = string
 }

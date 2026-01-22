@@ -14,3 +14,6 @@ data "aws_ami" "ubuntu" {
 
   owners = ["099720109477"] # Canonical
 }
+
+# Get current region
+data "aws_region" "current" {}

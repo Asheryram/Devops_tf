@@ -42,13 +42,6 @@ resource "aws_security_group" "app" {
   vpc_id      = var.vpc_id
 
 
-  ingress {
-    description     = "HTTP from web tier"
-    from_port       = 80
-    to_port         = 80
-    protocol        = "tcp"
-    security_groups = [aws_security_group.web.id]
-  }
 
    # Allow traffic from ALB on app port 3000
   ingress {
