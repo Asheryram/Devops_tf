@@ -1,40 +1,40 @@
 variable "region" {
-type = string
+  type = string
 }
 
 
 variable "environment" {
-type = string
+  type = string
 }
 
 
 variable "project" {
-type = string
+  type = string
 }
 
 
 variable "owner" {
-type = string
+  type = string
 }
 
 
 variable "vpc_cidr" {
-type = string
+  type = string
 }
 
 
 variable "public_subnet_cidrs" {
-type = list(string)
+  type = list(string)
 }
 
 
 variable "app_subnet_cidrs" {
-type = list(string)
+  type = list(string)
 }
 
 
 variable "db_subnet_cidrs" {
-type = list(string)
+  type = list(string)
 }
 
 
@@ -42,16 +42,16 @@ type = list(string)
 
 
 variable "db_name" {
-type = string
+  type = string
 }
 
 
 variable "db_username" {
-type = string
+  type = string
 }
 
 
 variable "db_password" {
-type = string
-sensitive = true
+  type      = string
+  sensitive = true
 }

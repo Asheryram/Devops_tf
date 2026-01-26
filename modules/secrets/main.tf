@@ -2,9 +2,9 @@
 
 # Create secret for database password
 resource "aws_secretsmanager_secret" "db_password" {
-  name                    = "${var.project}-${var.environment}-db-password"
+  name                    = "${var.project}-${var.environment}-db-password-yramAsher"
   description             = "Database password for ${var.project}"
-  recovery_window_in_days = 7
+  recovery_window_in_days = 0
   tags                    = var.tags
 }
 
@@ -23,9 +23,9 @@ resource "aws_secretsmanager_secret_version" "db_password" {
 
 # Create secret for database credentials (alternative simpler format)
 resource "aws_secretsmanager_secret" "db_credentials" {
-  name                    = "${var.project}-${var.environment}-db-credentials"
+  name                    = "${var.project}-${var.environment}-db-credentials-yramAsher"
   description             = "Database credentials for ${var.project}"
-  recovery_window_in_days = 7
+  recovery_window_in_days = 0
   tags                    = var.tags
 }
 

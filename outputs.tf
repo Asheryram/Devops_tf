@@ -1,10 +1,10 @@
 output "alb_dns" {
-value = module.alb.alb_dns
+  value = module.alb.alb_dns
 }
 
 
 output "asg_name" {
-value = module.compute.asg_name
+  value = module.compute.asg_name
 }
 
 

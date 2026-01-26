@@ -195,15 +195,11 @@ Provisions EC2 instances with Auto Scaling capabilities for the application tier
 
 **Resources Created:**
 
-**Option A - Auto Scaling Group (Recommended):**
 - Launch Template with user data
 - Auto Scaling Group (desired: 2, min: 1, max: 4)
 - Scaling policies (optional: CPU-based)
 - Instance profile (if needed)
 
-**Option B - Static EC2 Instances:**
-- 2 EC2 instances in private app subnets
-- Instance profiles attached
 
 **Key Variables:**
 - `instance_type`: EC2 instance type (e.g., "t3.micro")
@@ -339,8 +335,8 @@ Securely manages sensitive database credentials using AWS Secrets Manager.
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/3tier-aws-terraform.git
-cd 3tier-aws-terraform
+git clone https://github.com/Asheryram/Devops_tf.git
+cd Devops_tf
 ```
 
 ### Step 2: Configure Variables
