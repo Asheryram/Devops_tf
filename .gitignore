@@ -2,6 +2,9 @@
 *.tfstate
 *.tfstate.backup
 *.tfvars
+.terraform/
+.terraform.lock.hcl
+
 
 # Crash log files
 crash.log
@@ -12,7 +15,7 @@ override.tf.json
 *_override.tf
 *_override.tf.json
 
-# CLI configuration files
+# CLI configuration files`
 .terraformrc
 terraform.rc
 
